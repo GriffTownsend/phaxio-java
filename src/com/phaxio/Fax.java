@@ -2,17 +2,18 @@ package com.phaxio;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import com.phaxio.status.FaxStatus;
 import com.google.gson.JsonObject;
 import com.phaxio.exception.PhaxioException;
+import com.phaxio.status.FaxStatus;
 import com.phaxio.util.PagedList;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -56,7 +57,7 @@ public class Fax {
      * @throws PhaxioException
      */
     public static long send(List<String> phoneNumbers, List<File> files, Map<String, Object> options) throws PhaxioException{
-        HashMap<String, InputStream> inputStreamMap = new HashMap();
+        Map<String, InputStream> inputStreamMap = new LinkedHashMap();
         
         for(File file : files){
             try {
@@ -79,7 +80,7 @@ public class Fax {
      */
     public static long send(List<String> phoneNumbers, Map<String, InputStream> inputStreamMap, Map<String, Object> options) throws PhaxioException{
         if (options == null){
-            options = new HashMap<String,Object>();
+            options = new LinkedHashMap<String,Object>();
         }
 
 	int i = 0;
@@ -115,7 +116,7 @@ public class Fax {
      * @throws PhaxioException
      */
     public static long resend(long faxId) throws PhaxioException{
-        Map<String,Object> options = new HashMap<String,Object>();
+        Map<String,Object> options = new LinkedHashMap<String,Object>();
         options.put("id", faxId);
 
         JsonObject json = Phaxio.doRequest("resendFax", options, "POST");
@@ -132,7 +133,7 @@ public class Fax {
     }
 
     public static InputStream getFile(String id, String type) throws PhaxioException {
-        Map<String,Object> options = new HashMap<String,Object>();
+        Map<String,Object> options = new LinkedHashMap<String,Object>();
 
         options.put("id", id);
         if (type != null) options.put("type", type);
@@ -145,7 +146,7 @@ public class Fax {
     }
 
     public static void cancel(String id) throws PhaxioException {
-        Map<String,Object> options = new HashMap<String,Object>();
+        Map<String,Object> options = new LinkedHashMap<String,Object>();
         options.put("id", id);
 
         Phaxio.doRequest("faxCancel", options, "POST");
@@ -159,7 +160,7 @@ public class Fax {
         PagedList<Fax> list = new PagedList<Fax>();
 
         if (options == null){
-            options = new HashMap<String,Object>();
+            options = new LinkedHashMap<String,Object>();
         }
 
         if (start != null){
@@ -191,7 +192,7 @@ public class Fax {
 
 
     public static Fax status(String id) throws PhaxioException {
-        Map<String,Object> options = new HashMap<String,Object>();
+        Map<String,Object> options = new LinkedHashMap<String,Object>();
         options.put("id", id);
 
         JsonObject result = Phaxio.doRequest("faxStatus", options, "POST");
@@ -210,7 +211,7 @@ public class Fax {
      */
     public static boolean testReceive(File file, Map<String, Object> options) throws PhaxioException{
         if (options == null){
-            options = new HashMap<String,Object>();
+            options = new LinkedHashMap<String,Object>();
         }
 
         options.put("filename", file);

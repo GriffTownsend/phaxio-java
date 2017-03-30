@@ -10,3 +10,9 @@ dist/
 manifest.mf
 test/com/phaxio/test/Playarea.java
 test/key.json
+/nbproject/private/private.properties
+/nbproject/build-impl.xml
+/nbproject/project.properties
+/nbproject/genfiles.properties
+/nbbuild.xml
+/phaxio-java.iml
